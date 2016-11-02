@@ -1,14 +1,22 @@
 // business logic
-
-
-
-var rollDice = function() {
-  var userRoll = Math.floor((Math.random()*6)+1);
-  return userRoll;
+function Player1() {
+  this.totalScore = 0;
+  this.runningScore = 0;
 }
 
-  var scores = 0;
 
+Player1.prototype.rollDice = function() {
+
+  var diceRoll = Math.floor((Math.random()*6)+1);
+
+  if (diceRoll === 1) {
+    this.runningScore = 0;
+  } else if (diceRoll !== 1) {
+    this.runningScore += diceRoll;
+  } else if (runningScore >= 100) {
+    alert("game over");
+  }
+}
 
 // user logic
 $(document).ready(function(){
@@ -16,26 +24,20 @@ $(document).ready(function(){
   $("form#turn").submit(function(event){
     event.preventDefault();
 
-    // var userInput = $("button#playerRoll").val(0);
-    // var userInputHold = $("button#playerHold").val(1);
+    // var userInput = $("button#playerRoll").val();
+    // var userInputHold = $("button#playerHold").val();
+    var player1Turn = new Player1();
 
-    var userClick = rollDice();
 
-    var resetTotal = function() {
-      if (userClick === 1) {
-        var reset = 0;
-        return reset;
-      } else {
-      // if (userClick === <=6)
-        var runningScore = (scores += userClick);
-        return runningScore;
-      }
-    }
 
-    $("#rollOne").text(userClick);
 
-    $("#turnTotal").text(resetTotal);
+    $("#rollOne").text(diceRoll); // diceRoll currently out of scope, need to find a way to make it global
+
+    $("#turnTotal").text(player1Turn.rollDice()); //
 
   });
+
+
+  //callback for holding
 
 });
