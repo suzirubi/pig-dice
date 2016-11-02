@@ -1,40 +1,40 @@
 // business logic
-function Score(totalScore) {
-  this.score = totalScore;
-}
-
-Score.prototype.addScore = function (thisRoll) {
-  return this.score += thisRoll;
-}
 
 
-var rollDice = function(userRoll) {
+var rollDice = function() {
   var userRoll = Math.floor((Math.random()*6)+1);
   return userRoll;
 }
 
-var Scores = [];
+var scores = 0;
+
+
+
 // user logic
 $(document).ready(function(){
-
 
   $("form#turn").submit(function(event){
     event.preventDefault();
 
+    // var userInput = $(".player1Roll").val(0);
+    // var userInputHold = $(".player1Roll").val(1);
 
-    var userRoll = $(".player1Roll").val(0);
-    var userHold = $(".player1Roll").val(1);
+    var userRollTurn = rollDice();
 
-    var rollTurn = rollDice(userRoll);
+    var resetTotal = function() {
+      if (userRollTurn === 1) {
+        var reset = 0;
+        return reset;
+      } else {
+        var runningScore = (scores += userRollTurn);
+        return runningScore;
+      }
+    }
 
-    var newTurnScore = new Score(rollTurn);
-    Scores.push(newTurnScore);
 
-    var runningScore = Scores[0].addScore(newTurnScore);
+    $("#rollOne").text(userRollTurn);
 
-
-    $("#rollOne").text(rollTurn);
-    $("#turnTotal").text(runningScore);
+    $("#turnTotal").text(resetTotal);
 
   });
 
