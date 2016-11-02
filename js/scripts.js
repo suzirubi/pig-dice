@@ -1,13 +1,13 @@
 // business logic
 
 
+
 var rollDice = function() {
   var userRoll = Math.floor((Math.random()*6)+1);
   return userRoll;
 }
 
-var scores = 0;
-
+  var scores = 0;
 
 
 // user logic
@@ -16,23 +16,23 @@ $(document).ready(function(){
   $("form#turn").submit(function(event){
     event.preventDefault();
 
-    // var userInput = $(".player1Roll").val(0);
-    // var userInputHold = $(".player1Roll").val(1);
+    // var userInput = $("button#playerRoll").val(0);
+    // var userInputHold = $("button#playerHold").val(1);
 
-    var userRollTurn = rollDice();
+    var userClick = rollDice();
 
     var resetTotal = function() {
-      if (userRollTurn === 1) {
+      if (userClick === 1) {
         var reset = 0;
         return reset;
       } else {
-        var runningScore = (scores += userRollTurn);
+      // if (userClick === <=6)
+        var runningScore = (scores += userClick);
         return runningScore;
       }
     }
 
-
-    $("#rollOne").text(userRollTurn);
+    $("#rollOne").text(userClick);
 
     $("#turnTotal").text(resetTotal);
 
