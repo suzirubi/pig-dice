@@ -1,27 +1,19 @@
 // business logic
-// var rollDice = function() {
-//   var playerOneValue = Math.floor((Math.random()*6)+1);
-//   return playerOneValue;
-// }
-//
-// var playerOneScore = []
-// var Scores = [0];
-
-function Score (Score.rollDice) {
-  this.roll = roll;
+function Score(totalScore) {
+  this.score = totalScore;
 }
 
-Score.prototype.rollDice = function(roll) {
-  return this.roll = Math.floor((Math.random()*6)+1);
+Score.prototype.addScore = function (thisRoll) {
+  return this.score += thisRoll;
 }
 
 
-var playerOneScore = [this.role];
-console.log(playerOneScore);
-var Scores = [0];
+var rollDice = function(userRoll) {
+  var userRoll = Math.floor((Math.random()*6)+1);
+  return userRoll;
+}
 
-
-
+var Scores = [];
 // user logic
 $(document).ready(function(){
 
@@ -29,15 +21,20 @@ $(document).ready(function(){
   $("form#turn").submit(function(event){
     event.preventDefault();
 
-    // var initialRoll = 0;
-    // var initialResult = new Score (initialRoll);
 
     var userRoll = $(".player1Roll").val(0);
-    var newRoll = new Score (roll);
-    var rollResult = Score.rollDice(userRoll);
+    var userHold = $(".player1Roll").val(1);
+
+    var rollTurn = rollDice(userRoll);
+
+    var newTurnScore = new Score(rollTurn);
+    Scores.push(newTurnScore);
+
+    var runningScore = Scores[0].addScore(newTurnScore);
 
 
-    $("#rollOne").text(rollResult);
+    $("#rollOne").text(rollTurn);
+    $("#turnTotal").text(runningScore);
 
   });
 
